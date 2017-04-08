@@ -86,15 +86,17 @@ def smallest_int(numbers):
 
     smallest_num = None
 
-    i = 0
-    while i < len(numbers)-1:
-        if numbers[i] < numbers[i+1]:
-            smallest_num = numbers[i]
-        else:
-            smallest_num = numbers[i+1]
-        i = i + 1    
+    if len(numbers) == 0:
+        return smallest_num
+    else:
+        smallest_num = numbers[0]
+        i = 0
+        while i < len(numbers)-1:
+            i = i + 1
+            if smallest_num > numbers[i]:
+                smallest_num = numbers[i]
 
-    return smallest_num
+        return smallest_num
 
 
 def largest_int(numbers):
@@ -115,8 +117,19 @@ def largest_int(numbers):
         >>> largest_int([]) is None
         True
     """
+    largest_num = None
 
-    return 0
+    if len(numbers) == 0:
+        return largest_num
+    else:
+        largest_num = numbers[0]
+        i = 0
+        while i < len(numbers)-1:
+            i = i + 1
+            if largest_num < numbers[i]:
+                largest_num = numbers[i]
+
+        return largest_num
 
 
 def halvesies(numbers):
@@ -133,8 +146,9 @@ def halvesies(numbers):
         >>> halvesies([1, 5])
         [0.5, 2.5]
     """
+    half_list = [float(num)/2.0 for num in numbers]
 
-    return []
+    return half_list
 
 
 def word_lengths(words):
@@ -145,8 +159,9 @@ def word_lengths(words):
         >>> word_lengths(["hello", "hey", "hello", "spam"])
         [5, 3, 5, 4]
     """
+    length_list = [len(word) for word in words]
 
-    return []
+    return length_list
 
 
 def sum_numbers(numbers):
@@ -165,8 +180,9 @@ def sum_numbers(numbers):
         >>> sum_numbers([])
         0
     """
-
-    return None
+    # reduce(function, list)
+    #reduce( (lambda x, y: x + y), numbers, 0)
+    return reduce( (lambda x, y: x + y), numbers, 0)
 
 
 def mult_numbers(numbers):
@@ -189,7 +205,7 @@ def mult_numbers(numbers):
         1
     """
 
-    return None
+    return reduce( (lambda x, y: x * y), numbers, 1)
 
 
 def join_strings(words):
@@ -208,8 +224,11 @@ def join_strings(words):
         >>> join_strings([])
         ''
     """
-
-    return "Not the right thing"
+    long_string = ""
+    for word in words:
+        long_string = long_string + word
+ 
+    return long_string
 
 
 def average(numbers):
@@ -231,8 +250,16 @@ def average(numbers):
     (Think of the best way to handle an empty input list, though,
     a feel free to provide a good solution here.)
     """
-
-    return 0
+    
+    if len(numbers) == 0:
+        return None
+    else:
+        total = 0
+        for num in numbers:
+            total = total + num
+        
+        avg_num = float(total) / float(len(numbers))
+        return avg_num
 
 
 def join_strings_with_comma(words):
@@ -251,8 +278,14 @@ def join_strings_with_comma(words):
         >>> join_strings_with_comma(["Pretzel"])
         'Pretzel'
     """
+    long_string = ""
 
-    return ""
+    i = 0
+    while i < len(words)-1:
+        long_string = long_string + words[i] + ", "
+        i = i + 1
+    long_string = long_string + words[len(words)-1]
+    return long_string
 
 
 def reverse_list(items):
@@ -277,8 +310,13 @@ def reverse_list(items):
         >>> orig
         ['apple', 'berry', 'cherry']
     """
+    reverse_items = []
+    i = len(items)-1
+    while i >= 0:
+        reverse_items.append(items[i])
+        i = i - 1
 
-    return []
+    return reverse_items
 
 
 def reverse_list_in_place(items):
@@ -303,8 +341,16 @@ def reverse_list_in_place(items):
         >>> orig
         ['I', 'love', 'cookies']
     """
+    
+    i = 0
+    j = len(items) - 1
 
-    return []
+    while i >= 0 and i != j:
+        temp = items[i]
+        items[i] = items[j]
+        items[j] = temp
+        i = i + 1
+        j = j - 1
 
 
 def duplicates(items):
