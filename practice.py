@@ -379,7 +379,19 @@ def duplicates(items):
         ['apple', 'apple', 'berry']
     """
 
-    return []
+    duplicate_list = []
+
+    # Iterate through each item in items
+    # Then iterate through the rest of list to see if item is in the list
+    i = 0
+    while i < len(items)-1:
+        if items[i] in items[i+1:] and items[i] not in duplicate_list: 
+            duplicate_list.append(items[i])
+            i += 1
+        else:
+            i += 1
+
+    return duplicate_list
 
 
 def find_letter_indices(words, letter):
@@ -409,7 +421,26 @@ def find_letter_indices(words, letter):
     `None`.)
     """
 
-    return []
+    index_list = []
+
+    # Iterate through all the words in the word list
+    for word in words:
+
+        i = 0
+        
+        if letter not in word:
+            index_list.append(None)
+        else:
+        # Iterating through all the letters
+            found_index = False
+            while i < len(word) and found_index == False:
+                # If the letter appears in the word, add the position to list
+                if word[i] == letter:
+                    index_list.append(i)
+                    found_index = True
+                i = i + 1
+
+    return index_list
 
 
 #####################################################################

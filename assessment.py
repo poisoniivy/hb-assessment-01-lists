@@ -17,7 +17,8 @@ def all_odd(numbers):
         []
     """
 
-    return ['the wrong thing']
+    # Returns list of numbers if number has remainder of 1
+    return [num for num in numbers if num % 2 == 1]
 
 
 def print_indices(items):
@@ -45,9 +46,11 @@ def print_indices(items):
         3 Volvo
     
     """
-
-    print("Nothing at all")
-
+    # Creating a list of indices to print out
+    index_list = sorted(range(0, len(items)), reverse = True)
+    for word in items:
+        # Since index_list if reversed, popping out the numbers to print out
+        print index_list.pop(), word
 
 def foods_in_common(foods1, foods2):
     """Find foods in common.
@@ -83,8 +86,10 @@ def foods_in_common(foods1, foods2):
         []
 
     """
+    # Combine two lists via set constructor and intersecting them
+    common_list = list(set(foods1) & set(foods2))
 
-    return ['the wrong thing']
+    return sorted(common_list)
 
 
 def every_other_item(items):
@@ -103,8 +108,8 @@ def every_other_item(items):
        ... )
        ['you', 'are', 'good', 'at', 'code']
     """
-
-    return ['the wrong thing']
+    # Returning list of items slicing the item list with step of 2
+    return items[0::2]
 
 
 def largest_n_items(items, n):
@@ -129,7 +134,12 @@ def largest_n_items(items, n):
         [3, 3]
     """
 
-    return []
+    # Checking if the "nth" number is valid, returning empty list if <= 0
+    if n <= 0:
+        return []
+    else:
+        # Sorting in ascending order, then slicing the last n items
+        return sorted(items)[-n:]
 
 
 #####################################################################
